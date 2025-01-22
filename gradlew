@@ -82,6 +82,9 @@ do
     esac
 done
 
+chmod +x ./gradlew
+
+
 # This is normally unused
 # shellcheck disable=SC2034
 APP_BASE_NAME=${0##*/}
