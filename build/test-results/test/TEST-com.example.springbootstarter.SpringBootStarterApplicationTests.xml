@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.springbootstarter.SpringBootStarterApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-01-22T15:18:28" hostname="LAPTOP-INGNU762" time="1.0">
+  <properties/>
+  <testcase name="Hello_ReturnsHello()" classname="com.example.springbootstarter.SpringBootStarterApplicationTests" time="1.0"/>
+  <system-out><![CDATA[16:18:26.734 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.springbootstarter.SpringBootStarterApplicationTests]: SpringBootStarterApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:18:26.868 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.springbootstarter.SpringBootStarterApplication for test class com.example.springbootstarter.SpringBootStarterApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.1)
+
+2025-01-22T16:18:27.333+01:00  INFO 15588 --- [Spring-Boot-Starter] [    Test worker] c.e.s.SpringBootStarterApplicationTests  : Starting SpringBootStarterApplicationTests using Java 17.0.14 with PID 15588 (started by maxam in C:\Users\maxam\Desktop\Spring-Boot-Starter)
+2025-01-22T16:18:27.334+01:00  INFO 15588 --- [Spring-Boot-Starter] [    Test worker] c.e.s.SpringBootStarterApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2025-01-22T16:18:28.615+01:00  INFO 15588 --- [Spring-Boot-Starter] [    Test worker] c.e.s.SpringBootStarterApplicationTests  : Started SpringBootStarterApplicationTests in 1.556 seconds (process running for 2.919)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
