@@ -7,10 +7,12 @@ import org.springframework.scheduling.config.Task;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public interface UserRepository {
-    public Task AddUser(CreateUserDTO dto) throws Exception;
+    public User AddUser(CreateUserDTO dto) throws Exception;
     public User GetUserByEmail(String email);
+    public User GetUserById(UUID id);
     public List<User> GetUsers();
     public void DeleteUser(UUID id);
 }

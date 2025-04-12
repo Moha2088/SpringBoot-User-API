@@ -13,4 +13,6 @@ public class User {
         Name = name;
         Email = email;
     }
+
+    public User() { }
 }

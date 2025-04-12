@@ -30,15 +30,15 @@ public class UserController {
         return new ResponseEntity<>("Hello World!", HttpStatus.OK);
     }
 
-    @PostMapping("users")
-    public ResponseEntity<Task> AddUser(@RequestBody CreateUserDTO dto) throws Exception {
+    @PostMapping()
+    public ResponseEntity<User> AddUser(@RequestBody CreateUserDTO dto) throws Exception {
         try {
             var result = _userRepository.AddUser(dto);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
 
         catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -54,7 +54,13 @@ public class UserController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("{id}")
+    public ResponseEntity<User> GetUserById(@PathVariable UUID id){
+        var result = _userRepository.GetUserById(id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
     public ResponseEntity<User> DeleteUser(@PathVariable UUID id){
         _userRepository.DeleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

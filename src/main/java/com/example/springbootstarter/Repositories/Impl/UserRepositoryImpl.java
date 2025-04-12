@@ -8,13 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Repository;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-    private List<User> _users;
+    private List<User> _users = new ArrayList<User>() {};
 
 
     public UserRepositoryImpl() {
@@ -22,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 
     @Override
-    public Task AddUser(CreateUserDTO dto) throws Exception {
+    public User AddUser(CreateUserDTO dto) throws Exception {
 
         Boolean isEmailTaken = _users
                 .stream()
@@ -32,10 +34,9 @@ public class UserRepositoryImpl implements UserRepository {
             throw new Exception("This email is taken!");
         }
 
-        ModelMapper modelMapper = new ModelMapper();
-        User user = modelMapper.map(dto, User.class);
+        User user = new User(dto.Name,dto.Email);
         _users.add(user);
-        return null;
+        return user;
     }
 
     @Override
@@ -47,6 +48,16 @@ public class UserRepositoryImpl implements UserRepository {
     public User GetUserByEmail(String email) {
         var user = _users.stream()
                 .filter(u -> u.Email.equals(email))
+                .findFirst()
+                .get();
+
+        return user;
+    }
+
+    public User GetUserById(UUID id){
+        var user = _users
+                .stream()
+                .filter(u -> u.Id.equals(id))
                 .findFirst()
                 .get();
 
