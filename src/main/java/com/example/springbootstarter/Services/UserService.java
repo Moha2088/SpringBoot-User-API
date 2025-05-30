@@ -1,17 +1,12 @@
-package com.example.springbootstarter.Repositories.Interfaces;
+package com.example.springbootstarter.Services;
 
 import com.example.springbootstarter.Repositories.DTOS.CreateUserDTO;
 import com.example.springbootstarter.Repositories.Models.User;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.scheduling.config.Task;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
-public interface UserRepository extends CrudRepository<User, Long> {
-
+public interface UserService {
     User AddUser(CreateUserDTO dto);
     User GetUserByEmail(String email);
     User GetUserById(UUID id);
