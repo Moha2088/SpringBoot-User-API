@@ -1,6 +1,6 @@
-package com.example.springbootstarter.Repositories.DTOS;
+package com.example.springbootstarter.DTOS;
 
-import com.example.springbootstarter.Repositories.Models.User;
+import com.example.springbootstarter.Models.User;
 
 public class CreateUserDTO {
     public String Name;

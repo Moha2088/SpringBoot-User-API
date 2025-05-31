@@ -1,68 +1,46 @@
 package com.example.springbootstarter.Controllers;
 
-import com.example.springbootstarter.Repositories.DTOS.CreateUserDTO;
-import com.example.springbootstarter.Repositories.Interfaces.UserRepository;
-import com.example.springbootstarter.Repositories.Models.User;
-import org.apache.coyote.Response;
+import com.example.springbootstarter.DTOS.CreateUserDTO;
+import com.example.springbootstarter.Models.User;
+import com.example.springbootstarter.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.config.Task;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
-    private UserRepository _userRepository;
-
     @Autowired
-    public UserController(UserRepository userRepository) {
-        _userRepository = userRepository;
+    private UserService userService;
+
+
+    @PostMapping("/")
+    public ResponseEntity<User> AddUser(@RequestBody CreateUserDTO dto){
+        User result = userService.AddUser(dto);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
-    @GetMapping("hello")
-    public ResponseEntity<String> hello() {
-        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
-    }
-
-    @PostMapping()
-    public ResponseEntity<User> AddUser(@RequestBody CreateUserDTO dto) throws Exception {
-        try {
-            var result = _userRepository.AddUser(dto);
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }
-
-        catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @GetMapping()
-    public ResponseEntity<List<User>> GetUsers(){
-        var results = _userRepository.GetUsers();
-        return results != null ? new ResponseEntity<>(results, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping("/email/{email}")
-    public ResponseEntity<User> GetUserByEmail(@PathVariable String email){
-        var result = _userRepository.GetUserByEmail(email);
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<User>> GetUser(@PathVariable long id){
+        Optional<User> result = userService.GetUser(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<User> GetUserById(@PathVariable UUID id){
-        var result = _userRepository.GetUserById(id);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    @GetMapping("/")
+    public ResponseEntity<List<User>> GetUsers(@PathVariable long id){
+        List<User> result = userService.GetUsers();
+        return !result.isEmpty()
+                ? new ResponseEntity<>(result, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<User> DeleteUser(@PathVariable UUID id){
-        _userRepository.DeleteUser(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> DeleteUser(@PathVariable long id){
+        userService.DeleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
