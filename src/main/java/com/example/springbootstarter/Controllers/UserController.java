@@ -3,7 +3,7 @@ package com.example.springbootstarter.Controllers;
 import com.example.springbootstarter.Controllers.Exceptions.UserNotFoundException;
 import com.example.springbootstarter.DTOS.CreateUserDTO;
 import com.example.springbootstarter.Models.User;
-import com.example.springbootstarter.Services.UserService;
+import com.example.springbootstarter.Services.Impl.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -19,14 +19,14 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
 
     @Operation(summary = "Creates a user")
     @ApiResponse(responseCode = "201", description = "Returns Created")
     @PostMapping("/")
     public ResponseEntity<User> CreateUser(@RequestBody CreateUserDTO dto){
-        User result = userService.AddUser(dto);
+        User result = userServiceImpl.AddUser(dto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
@@ -34,7 +34,7 @@ public class UserController {
     @ApiResponse(responseCode = "200", description = "Returns OK if user exists")
     @GetMapping("/{id}")
     public ResponseEntity<Optional<User>> GetUser(@PathVariable long id) throws UserNotFoundException{
-            Optional<User> result = userService.GetUser(id);
+            Optional<User> result = userServiceImpl.GetUser(id);
             if(result.equals(Optional.empty())){
                 throw new UserNotFoundException(id);
             }
@@ -48,7 +48,7 @@ public class UserController {
     })
     @GetMapping("/")
     public ResponseEntity<?> GetUsers(){
-        List<User> result = userService.GetUsers();
+        List<User> result = userServiceImpl.GetUsers();
         return !result.isEmpty()
                 ? new ResponseEntity<>(result, HttpStatus.OK)
                 : new ResponseEntity<>("No users exist!", HttpStatus.NOT_FOUND);
@@ -58,7 +58,7 @@ public class UserController {
     @ApiResponse(responseCode = "204", description = "Returns NoContent")
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> DeleteUser(@PathVariable long id){
-        userService.DeleteUser(id);
+        userServiceImpl.DeleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
