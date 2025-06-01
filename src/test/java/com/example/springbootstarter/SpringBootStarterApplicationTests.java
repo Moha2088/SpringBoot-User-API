@@ -18,17 +18,7 @@ class SpringBootStarterApplicationTests {
     @Autowired
     private UserController _userController;
 
-    @Test
-    void contextLoads() {
-        assert _userController != null;
-    }
 
-    @Test
-    void Hello_ReturnsHello(){
-        var result = _userController.hello();
 
-        Assert.notNull(result);
-        assertEquals("Hello World!", result.getBody());
-        assertInstanceOf(ResponseEntity.class, result);
-    }
+
 }

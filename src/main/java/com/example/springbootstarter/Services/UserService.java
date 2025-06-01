@@ -1,5 +1,6 @@
 package com.example.springbootstarter.Services;
 
+import com.example.springbootstarter.Controllers.Exceptions.UserNotFoundException;
 import com.example.springbootstarter.DTOS.CreateUserDTO;
 import com.example.springbootstarter.Repositories.UserRepository;
 import com.example.springbootstarter.Models.User;
