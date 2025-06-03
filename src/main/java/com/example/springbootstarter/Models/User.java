@@ -1,5 +1,7 @@
 package com.example.springbootstarter.Models;
 
+import com.example.springbootstarter.DTOS.UserGetDto;
+
 import javax.persistence.*;
 
 @Entity
@@ -50,5 +52,9 @@ public class User {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public UserGetDto ToDto(){
+        return new UserGetDto(this.Id, this.Name, this.Email);
     }
 }

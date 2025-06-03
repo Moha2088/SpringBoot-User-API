@@ -1,14 +1,22 @@
 package com.example.springbootstarter.Services;
 
 import com.example.springbootstarter.DTOS.CreateUserDTO;
-import com.example.springbootstarter.Models.User;
-
+import com.example.springbootstarter.DTOS.UpdateUserDto;
+import com.example.springbootstarter.DTOS.UserGetDto;
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    User AddUser(CreateUserDTO dto);
-    Optional<User> GetUser(long id);
-    List<User> GetUsers();
-    void DeleteUser(long id);
+
+    UserGetDto AddUser(CreateUserDTO dto);
+
+    Optional<UserGetDto> GetUserById(long id);
+
+    Optional<UserGetDto> GetUserByEmail(String email);
+
+    List<UserGetDto> GetUsers();
+
+    Optional<UserGetDto> UpdateUser(UpdateUserDto dto);
+
+    Optional<Long> DeleteUser(long id);
 }
