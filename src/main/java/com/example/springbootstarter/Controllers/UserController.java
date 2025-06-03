@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class UserController {
     @PostMapping("/")
     public ResponseEntity<UserGetDto> CreateUser(@RequestBody CreateUserDTO dto) {
         UserGetDto result = userServiceImpl.AddUser(dto);
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @Operation(summary = "Gets a user by Id")
@@ -39,7 +40,7 @@ public class UserController {
         if (result.isEmpty()) {
             throw new UserNotFoundException(id);
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return ResponseEntity.ok().body(result);
     }
 
     @Operation(summary = "Gets a user by Email")
@@ -53,7 +54,7 @@ public class UserController {
         if (result.isEmpty()) {
             throw new UserNotFoundException(email);
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return ResponseEntity.ok().body(result);
     }
 
     @Operation(summary = "Gets a list of users")
@@ -65,8 +66,8 @@ public class UserController {
     public ResponseEntity<?> GetUsers() {
         List<UserGetDto> result = userServiceImpl.GetUsers();
         return !result.isEmpty()
-                ? new ResponseEntity<>(result, HttpStatus.OK)
-                : new ResponseEntity<>("No users exist!", HttpStatus.NOT_FOUND);
+                ? ResponseEntity.ok().body(result)
+                : ResponseEntity.notFound().build();
     }
 
     @Operation(summary = "Updates a user")
@@ -80,7 +81,7 @@ public class UserController {
         if (result.isEmpty()) {
             throw new UserNotFoundException(dto.Id);
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return ResponseEntity.ok().body(result);
     }
 
     @Operation(summary = "Deletes a user by Id")
@@ -94,6 +95,6 @@ public class UserController {
         if (result.isPresent()) {
             throw new UserNotFoundException(result.get());
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -18,9 +18,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         final String Title = "User not found!";
         var format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         var formattedDate = LocalDate.now().format(format);
-        return new ResponseEntity<>(
-                new ExceptionResponse(Title, e.getMessage(), formattedDate),
-                HttpStatus.NOT_FOUND
-        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ExceptionResponse(Title, e.getMessage(), formattedDate));
     }
 }
