@@ -1,9 +1,9 @@
 package com.example.springbootstarter.Controllers;
 
 import com.example.springbootstarter.Controllers.Exceptions.UserNotFoundException;
-import com.example.springbootstarter.DTOS.CreateUserDTO;
-import com.example.springbootstarter.DTOS.UpdateUserDto;
-import com.example.springbootstarter.DTOS.UserGetDto;
+import com.example.springbootstarter.DTOS.User.CreateUserDTO;
+import com.example.springbootstarter.DTOS.User.UpdateUserDto;
+import com.example.springbootstarter.DTOS.User.UserGetDto;
 import com.example.springbootstarter.Services.Impl.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

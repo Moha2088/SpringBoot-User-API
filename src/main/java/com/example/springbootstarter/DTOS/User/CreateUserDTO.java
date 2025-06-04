@@ -1,4 +1,4 @@
-package com.example.springbootstarter.DTOS;
+package com.example.springbootstarter.DTOS.User;
 
 import com.example.springbootstarter.Models.User;
 

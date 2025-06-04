@@ -1,6 +1,4 @@
-package com.example.springbootstarter.DTOS;
-
-import com.example.springbootstarter.Models.User;
+package com.example.springbootstarter.DTOS.User;
 
 public class UpdateUserDto {
     public Long Id;

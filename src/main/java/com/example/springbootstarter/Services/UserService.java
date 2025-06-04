@@ -1,8 +1,8 @@
 package com.example.springbootstarter.Services;
 
-import com.example.springbootstarter.DTOS.CreateUserDTO;
-import com.example.springbootstarter.DTOS.UpdateUserDto;
-import com.example.springbootstarter.DTOS.UserGetDto;
+import com.example.springbootstarter.DTOS.User.CreateUserDTO;
+import com.example.springbootstarter.DTOS.User.UpdateUserDto;
+import com.example.springbootstarter.DTOS.User.UserGetDto;
 import java.util.List;
 import java.util.Optional;
 

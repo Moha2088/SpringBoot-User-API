@@ -1,6 +1,6 @@
 package com.example.springbootstarter.Models;
 
-import com.example.springbootstarter.DTOS.UserGetDto;
+import com.example.springbootstarter.DTOS.User.UserGetDto;
 
 import javax.persistence.*;
 

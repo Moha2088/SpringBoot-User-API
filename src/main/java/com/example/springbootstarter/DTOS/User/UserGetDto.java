@@ -1,4 +1,4 @@
-package com.example.springbootstarter.DTOS;
+package com.example.springbootstarter.DTOS.User;
 
 public class UserGetDto {
     public Long Id;
