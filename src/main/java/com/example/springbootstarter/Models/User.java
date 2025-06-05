@@ -1,8 +1,14 @@
 package com.example.springbootstarter.Models;
 
-import com.example.springbootstarter.DTOS.User.UserGetDto;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import com.example.springbootstarter.DTOS.User.UserGetDto;
 
 @Entity
 @Table(name = "User", indexes = {
@@ -13,7 +19,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long Id;
+    private Long Id;
 
     @Column(length = 20, nullable = false)
     private String Name;
