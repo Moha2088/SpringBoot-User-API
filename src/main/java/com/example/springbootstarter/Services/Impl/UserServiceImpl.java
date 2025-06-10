@@ -1,5 +1,12 @@
 package com.example.springbootstarter.Services.Impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.springbootstarter.CQRS.Commands.User.CreateUserCommand;
 import com.example.springbootstarter.CQRS.Commands.User.DeleteUserCommand;
 import com.example.springbootstarter.CQRS.Commands.User.UpdateUserCommand;
@@ -7,14 +14,9 @@ import com.example.springbootstarter.CQRS.Queries.User.GetUserByEmailQuery;
 import com.example.springbootstarter.CQRS.Queries.User.GetUserByIdQuery;
 import com.example.springbootstarter.CQRS.Queries.User.GetUserByNameQuery;
 import com.example.springbootstarter.DTOS.User.UserGetDto;
-import com.example.springbootstarter.Repositories.UserRepository;
 import com.example.springbootstarter.Models.User;
+import com.example.springbootstarter.Repositories.UserRepository;
 import com.example.springbootstarter.Services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {

@@ -33,12 +33,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private UserServiceImpl userServiceImpl;
+    private final UserServiceImpl userServiceImpl;
 
     @Autowired
     public UserController(UserServiceImpl userServiceImpl){
         this.userServiceImpl = userServiceImpl;
-    }
+    }   
 
     
     @Operation(summary = "Creates a user")
@@ -69,7 +69,7 @@ public class UserController {
         @ApiResponse(responseCode = "200", description = "Returns OK if a user with the name exist"),
         @ApiResponse(responseCode = "404", description = "Returns NotFound if a user with the name doesn't exist")
     })
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<Optional<UserGetDto>> GetUserByName(@PathVariable String name) throws UserNotFoundException{
         GetUserByNameQuery query = new GetUserByNameQuery(name);
         Optional<UserGetDto> result = userServiceImpl.GetUserByName(query);
@@ -84,7 +84,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Returns OK if a user with the email is exists"),
             @ApiResponse(responseCode = "400", description = "Returns NotFound if a user with the email doesn't exist")
     })
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<Optional<UserGetDto>> GetUserByEmail(@PathVariable String email) throws UserNotFoundException {
         GetUserByEmailQuery query = new GetUserByEmailQuery(email);
         Optional<UserGetDto> result = userServiceImpl.GetUserByEmail(query);
@@ -96,7 +96,7 @@ public class UserController {
 
     @Operation(summary = "Gets a list of users")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Returns OK if a user exist"),
+            @ApiResponse(responseCode = "200", description = "Returns OK if a user exists"),
             @ApiResponse(responseCode = "404", description = "Returns NotFound if the list is empty")
     })
     @GetMapping("/")

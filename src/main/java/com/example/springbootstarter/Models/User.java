@@ -1,12 +1,6 @@
 package com.example.springbootstarter.Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.example.springbootstarter.DTOS.User.UserGetDto;
 
@@ -26,6 +20,9 @@ public class User {
 
     @Column(length = 30, nullable = false)
     private String Email;
+
+    @ManyToOne
+    private Project Project;
 
     public User(String name, String email) {
         Name = name;
@@ -58,6 +55,14 @@ public class User {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public Project getProject() {
+        return Project;
+    }
+
+    public void setProject(Project project) {
+        Project = project;
     }
 
     public UserGetDto ToDto(){
