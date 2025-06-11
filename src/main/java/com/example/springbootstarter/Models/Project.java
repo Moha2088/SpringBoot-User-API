@@ -1,6 +1,6 @@
 package com.example.springbootstarter.Models;
 
-import com.example.springbootstarter.DTOS.Project.ProjectGetDto;
+import com.example.springbootstarter.DTOS.Project.ProjectDto;
 import com.example.springbootstarter.DTOS.User.UserGetDto;
 
 import javax.persistence.*;
@@ -33,21 +33,20 @@ public class Project {
 
     private Project() { }
 
-    public Project(Long id, String name, String description, Date from, Date to) {
-        this.Id = id;
+    public Project(String name, String description, Date from, Date to) {
         this.Name = name;
         this.Description = description;
         this.From = from;
         this.To = to;
     }
 
-    public ProjectGetDto ToDto(){
+    public ProjectDto ToDto(){
         List<UserGetDto> users = new ArrayList<UserGetDto>();
         getUsers().forEach(user -> {
             users.add(new UserGetDto(user.getId(), user.getName(), user.getEmail()));
         });
 
-        return new ProjectGetDto(getId(), getName(), getDescription(),getTo(), getFrom(), users);
+        return new ProjectDto(getId(), getName(), getDescription(),getTo(), getFrom(), users);
     }
 
     // Getters and Setters

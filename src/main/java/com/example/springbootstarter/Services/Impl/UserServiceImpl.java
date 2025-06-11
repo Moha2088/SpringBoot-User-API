@@ -30,8 +30,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserGetDto AddUser(CreateUserCommand command) {
+    public UserGetDto AddUser(CreateUserCommand command, Long userId) {
         User mappedUser = command.FromCommand(command);
+        User authenticatedUser = userRepository.findById(userId).get();
+        authenticatedUser.getProject().getUsers().add(mappedUser);
         userRepository.save(mappedUser);
         return mappedUser.ToDto();
     }

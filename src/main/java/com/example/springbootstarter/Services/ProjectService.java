@@ -1,14 +1,16 @@
 package com.example.springbootstarter.Services;
 
-import com.example.springbootstarter.CQRS.Commands.Project.CreateProjectCommand;
-import com.example.springbootstarter.CQRS.Queries.Project.GetProjectByIdQuery;
-import com.example.springbootstarter.DTOS.User.ProjectGetDto;
-import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
-public interface ProjectService {
-    Optional<ProjectGetDto> CreateProject(CreateProjectCommand command);
+import com.example.springbootstarter.CQRS.Commands.Project.CreateProjectCommand;
+import com.example.springbootstarter.CQRS.Commands.Project.DeleteProjectCommand;
+import com.example.springbootstarter.CQRS.Queries.Project.GetProjectByIdQuery;
+import com.example.springbootstarter.DTOS.Project.ProjectDto;
 
-    Optional<ProjectGetDto> GetProjectById(GetProjectByIdQuery query);
+public interface ProjectService {
+    ProjectDto CreateProject(CreateProjectCommand command);
+
+    Optional<ProjectDto> GetProjectById(GetProjectByIdQuery query);
+
+    Optional<Long> DeleteProject(DeleteProjectCommand command);
 }

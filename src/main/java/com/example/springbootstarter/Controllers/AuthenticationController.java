@@ -1,6 +1,6 @@
 package com.example.springbootstarter.Controllers;
 
-import com.example.springbootstarter.Services.JwtService;
+import com.example.springbootstarter.Services.Impl.JwtServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/auth")
 public class AuthenticationController {
 
-    private JwtService jwtService;
+    private JwtServiceImpl jwtService;
 
     @Autowired
-    public AuthenticationController(JwtService jwtService){
+    public AuthenticationController(JwtServiceImpl jwtService){
         this.jwtService = jwtService;
     }
 }

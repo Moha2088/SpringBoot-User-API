@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    UserGetDto AddUser(CreateUserCommand command);
+    UserGetDto AddUser(CreateUserCommand command, Long userId);
 
     Optional<UserGetDto> GetUserById(GetUserByIdQuery query);
 
