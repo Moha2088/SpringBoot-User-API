@@ -1,16 +1,18 @@
 package com.example.springbootstarter.Services.Impl;
 
-import com.example.springbootstarter.Models.User;
-import com.example.springbootstarter.Services.JwtService;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import io.jsonwebtoken.*;
-
-import javax.crypto.SecretKey;
 import java.time.Instant;
 import java.util.Date;
+import javax.crypto.SecretKey;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import com.example.springbootstarter.Models.User;
+import com.example.springbootstarter.Services.JwtService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 
 @SuppressWarnings("deprecation")
 @Service
@@ -49,5 +51,22 @@ public class JwtServiceImpl implements JwtService {
     private SecretKey getSigningKey() {
         byte[] keyBytes = Decoders.BASE64URL.decode(SecretKey);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    @Override
+    public String extractToken(HttpServletRequest request) {
+        String headerValue = request.getHeader("Authorization");
+        return !headerValue.isEmpty() && headerValue.startsWith("Bearer")
+                ? headerValue.substring(7)
+                : null;
+    }
+
+    @Override
+    public Boolean validateToken(String token) {
+        Jwts.parser()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token);
+        return true;
     }
 }
