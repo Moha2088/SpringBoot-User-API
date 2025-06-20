@@ -1,20 +1,26 @@
 package com.example.springbootstarter.Controllers.Middleware;
-
+import com.example.springbootstarter.Services.JwtService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StopWatch;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-public class RequestInterceptor implements HandlerInterceptor {
-    private final StopWatch watch = new StopWatch();
+public class JwtValidatorInterceptor implements HandlerInterceptor {
+    private final JwtService jwtService;
+
+    @Autowired
+    public JwtValidatorInterceptor(JwtService jwtService) {
+        this.jwtService = jwtService;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        watch.start();
         System.out.printf("Executing %s request%n", request.getMethod());
+        String token = jwtService.extractToken(request);
+        jwtService.validateToken(token);
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
 
@@ -25,8 +31,7 @@ public class RequestInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        watch.stop();
-        System.out.printf("Executed %s request%nRequest took %s", request.getMethod(), watch.getTotalTimeSeconds());
+        System.out.printf("Executed %s request", request.getMethod());
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 }

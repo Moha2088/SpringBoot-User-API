@@ -51,6 +51,8 @@ public class UserController {
     @ApiResponse(responseCode = "201", description = "Returns Created")
     @PostMapping("/")
     public ResponseEntity<UserGetDto> CreateUser(@RequestBody CreateUserCommand command, HttpServletRequest request) {
+        String token = jwtService.extractToken(request);
+        Long parsedUserId = (Long)jwtService.getAllClaims(token).get("UserId");
         UserGetDto result = userServiceImpl.AddUser(command, parsedUserId);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
